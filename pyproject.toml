@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "htn-backend-challenge"
+version = "1.0.0"
+description = ""
+authors = ["Kelvin Zhang <me@kelvinzhang.ca>"]
+
+[tool.taskipy.tasks]
+start = "python server.py"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+flask = "^1.1.2"
+flask-restx = "^0.2.0"
+shortuuid = "^1.0.1"
+
+[tool.poetry.dev-dependencies]
+taskipy = "^1.3.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
