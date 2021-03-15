@@ -6,7 +6,7 @@ class User(db.Model):
     name = db.Column(db.String(255))
     picture = db.Column(db.String(255))
     company = db.Column(db.String(255))
-    email = db.Column(db.String(255))
+    email = db.Column(db.String(255), index=True)
     phone = db.Column(db.String(255))
     skills = db.relationship("Skill") # one to many
 
