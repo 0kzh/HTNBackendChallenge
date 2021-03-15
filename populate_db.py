@@ -35,7 +35,7 @@ def populate_skills_for_user(user_id, skills):
         skill = skillModel.Skill(
             name=skill["name"],
             rating=skill["rating"],
-            user=user_id
+            user_id=user_id
         )
         db.session.add(skill)
 

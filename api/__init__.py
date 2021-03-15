@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restx import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 from api.routes import api
+from api.models import skillModel, userModel
 from api.models import db
 import os
 

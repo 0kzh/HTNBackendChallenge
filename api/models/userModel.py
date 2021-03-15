@@ -9,3 +9,8 @@ class User(db.Model):
     email = db.Column(db.String(255))
     phone = db.Column(db.String(255))
     skills = db.relationship("Skill") # one to many
+
+    def update(self, data):
+        for k, v in data.items():
+            setattr(self, k, v)
+        return self
