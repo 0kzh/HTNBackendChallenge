@@ -55,7 +55,7 @@ def add_user(name, picture, company, email, phone, skills):
         db.session.add(skill)
 
     db.session.commit()
-    
+
     user_json = makeSerializable(new_user)
     user_json["skills"] = _get_skills_for_user(new_user)
 
@@ -76,6 +76,9 @@ def fetch_user(id):
 # PUT /users/:id
 def update_user(id, data):
     user = User.query.get(id)
+
+    if not user:
+        return "User not found", 404
 
     if "skills" in data:
         skills = data["skills"]
@@ -105,3 +108,15 @@ def update_user(id, data):
     user_json["skills"] = _get_skills_for_user(new_user)
     
     return user_json
+
+# DELETE /users/<user_id>
+def remove_user(id):
+    user = User.query.get(id)
+
+    if not user:
+        return "User not found", 404
+
+    db.session.delete(user)
+    db.session.commit()
+
+    return "User successfully deleted"

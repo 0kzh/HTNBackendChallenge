@@ -7,6 +7,7 @@ api = Namespace('v1', description='V1 API')
 class Users(Resource):
     def get(self):
         return userController.fetch_all_users()
+
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('name', type=str, required=True)
@@ -33,6 +34,9 @@ class User(Resource):
         parser.add_argument('skills', type=dict, action="append", store_missing=False)
 
         return userController.update_user(id, parser.parse_args())
+
+    def delete(self, id):
+        return userController.remove_user(id)
 
 @api.route("/skills")
 class Skills(Resource):
