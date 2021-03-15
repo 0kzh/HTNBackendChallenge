@@ -1,4 +1,4 @@
-from api.controllers import userController
+from api.controllers import userController,skillsController
 from flask_restx import Namespace, Resource, reqparse
 
 api = Namespace('v1', description='V1 API')
@@ -24,4 +24,10 @@ class User(Resource):
 
         return userController.update_user(id, parser.parse_args())
 
-
+@api.route("/skills")
+class Skills(Resource):
+    def get(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('min_frequency', type=int)
+        parser.add_argument('max_frequency', type=int)
+        return skillsController.get_skills(**parser.parse_args())
