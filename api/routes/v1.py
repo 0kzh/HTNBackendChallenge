@@ -7,6 +7,16 @@ api = Namespace('v1', description='V1 API')
 class Users(Resource):
     def get(self):
         return userController.fetch_all_users()
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('name', type=str, required=True)
+        parser.add_argument('picture', type=str, required=True)
+        parser.add_argument('company', type=str, required=True)
+        parser.add_argument('email', type=str, required=True)
+        parser.add_argument('phone', type=str, required=True)
+        parser.add_argument('skills', type=dict, action="append", required=True) 
+
+        return userController.add_user(**parser.parse_args())
 
 @api.route("/users/<id>")
 class User(Resource):

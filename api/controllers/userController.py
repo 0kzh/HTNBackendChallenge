@@ -13,6 +13,12 @@ def _get_skills_for_user(user_obj):
         })
     return skills    
 
+def _validate_skills(skills):
+    for skill in skills:
+        if not "name" in skill or not "rating" in skill:
+            return False
+    return True
+
 # GET /users
 def fetch_all_users():
     users = User.query.all()
@@ -24,6 +30,36 @@ def fetch_all_users():
         res.append(user_json)
 
     return res
+
+# POST /users
+def add_user(name, picture, company, email, phone, skills):
+    if not _validate_skills(skills):
+        return "Need to specify a name and rating for all skills!", 400
+
+    new_user = User(
+        name=name,
+        picture=picture,
+        company=company,
+        email=email,
+        phone=phone
+    )
+    db.session.add(new_user)
+    db.session.flush()
+
+    for skill in skills:
+        skill = Skill(
+            name=skill["name"],
+            rating=skill["rating"],
+            user_id=new_user.id
+        )
+        db.session.add(skill)
+
+    db.session.commit()
+    
+    user_json = makeSerializable(new_user)
+    user_json["skills"] = _get_skills_for_user(new_user)
+
+    return user_json
 
 # GET /users/:id
 def fetch_user(id):
