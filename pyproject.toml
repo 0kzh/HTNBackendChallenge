@@ -5,7 +5,7 @@ description = ""
 authors = ["Kelvin Zhang <me@kelvinzhang.ca>"]
 
 [tool.taskipy.tasks]
-start = "python server.py"
+start = "python application.py"
 init_db = "python populate_db.py"
 
 [tool.poetry.dependencies]

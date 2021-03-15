@@ -6,10 +6,10 @@ from api.models import skillModel, userModel
 from api.models import db
 import os
 
-app = Flask(__name__)
+application = Flask(__name__)
 root_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(root_path, 'hackers.db')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(root_path, 'hackers.db')
+application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-api.init_app(app)
-db.init_app(app)
+api.init_app(application)
+db.init_app(application)

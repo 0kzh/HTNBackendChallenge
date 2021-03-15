@@ -1,11 +1,11 @@
-from api import app
+from api import application
 from api.models import db, userModel, skillModel
 import json
 
 DATA_FILE_PATH = "./hacker-data-2021.json"
 
 def load_db_data():
-    with app.app_context():
+    with application.app_context():
         db.create_all()
         with open(DATA_FILE_PATH) as f:
             data = json.load(f)
