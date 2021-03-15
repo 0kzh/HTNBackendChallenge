@@ -11,7 +11,9 @@ RUN poetry install --no-interaction
 
 COPY . /usr/src/app
 
+RUN poetry run task init_db
+
 ENV PORT 80
 ENV ENVIRONMENT production
 
-CMD [ "poetry", "run", "task", "start"]
+CMD [ "poetry", "run", "task", "start" ]
