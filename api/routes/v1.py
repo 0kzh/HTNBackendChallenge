@@ -31,3 +31,8 @@ class Skills(Resource):
         parser.add_argument('min_frequency', type=int)
         parser.add_argument('max_frequency', type=int)
         return skillsController.get_skills(**parser.parse_args())
+
+@api.route("/skills/<name>")
+class Skill(Resource):
+    def get(self, name):
+        return skillsController.get_skill(name)
